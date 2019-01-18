@@ -15,9 +15,9 @@ app.secret_key = 'jose'
 api = Api(app)
 
 
-@app.route('/', methods=['GET', 'POST'])
-def create():
-    return "1234567890", 200
+# @app.route('/', methods=['GET', 'POST'])
+# def create():
+#     return "1234567890", 200
 
 jwt = JWT(app, authenticate, identity)
 
