@@ -19,10 +19,6 @@ api = Api(app)
 def create():
     return "1234567890", 200
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 jwt = JWT(app, authenticate, identity)
 
 
