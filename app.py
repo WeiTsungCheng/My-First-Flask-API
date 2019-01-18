@@ -15,11 +15,16 @@ app.secret_key = 'jose'
 api = Api(app)
 
 
+@app.route('/', methods=['GET', 'POST'])
+def create():
+    return "1234567890", 200
+
 @app.before_first_request
 def create_tables():
     db.create_all()
 
 jwt = JWT(app, authenticate, identity)
+
 
 api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
