@@ -16,6 +16,12 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 # 這段將會去問運作系統 有沒有DATABASE_URL 這個參數，如果我們正在運行Heroku，將會為我們連結上postgre app
 # 為了讓在本地端開發的時候 還是可以使用sqlite ，所以把sqlite 的參數放在第二個，如果第一個讀不到才會找第二個）
+
+# 注意: 使用 PostgresSQL 和 原先使用SQLLite 有一個很大的差異，就是使用SQLLite 時 產生的item 所決定歸屬的 store 即便還沒有生成，
+# Postman也不會報錯，等到該store 被生成時，之前產生的item 會自動被加進去
+# 但是PostgresSQL 並不會，所以在產生item (無論是POST 或 PUT) ，都應該先產生item 將歸屬的 store ，否則Postman會報錯
+# 補充 產生的第一個 store 就是id = 1 , 產生的第二個 store 就是id = 2, 以此類推....，所以要產生一個item 設定它 item = 3 ， 必須先新增 Store 三次
+
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
