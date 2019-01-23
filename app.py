@@ -26,6 +26,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
+
+
+# Flask中有个配置属性叫做SECRET_KEY,其作用是：
+# Flask（以及相关的扩展extension）需要进行加密
+# 所以需要这个密钥SECRET_KEY
+# －》之所以需要加密，是因为有些涉及到安全的东西，需要加密
 app.secret_key = 'jose'
 api = Api(app)
 
